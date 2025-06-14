@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:32 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/14 20:38:55 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:38:36 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ void check_red_env(t_bash *bash)
 
 	while(tmp)
 	{
-		tmp->check_env = check_envirment(tmp->command);
-		tmp->check_red = check_redirection(tmp->command);
+		if (check_envirment(tmp->command) == 1)
+			tmp->check_env = 1;
+		if (check_redirection(tmp->command) == 1)
+			tmp->check_red = 1;
 		tmp = tmp->next;
 	}
 }

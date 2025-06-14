@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 20:34:56 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/14 21:30:42 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:39:19 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,20 @@ int main(int ac, char **av, char **env)
 	{
 		select_struct(bash);
 
-		printf("%d\n", bash->num_cmd);	
+		t_cmd *tmp = bash->s_cmd;
+		while (tmp)
+		{
+			int j = 0;
+			t_red *tmp_red = tmp->s_red;
+			while (tmp_red)
+			{
+				printf("redirection %d file: %s\n", j, tmp_red->file);
+				printf("redirection %d type: %u\n", j, tmp_red->type);
+				tmp_red = tmp_red->next;
+				j++;
+			}
+			tmp = tmp->next;
+		}
 
 		free_bash(bash);
 	}

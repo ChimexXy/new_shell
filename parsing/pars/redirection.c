@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:35 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/14 21:20:25 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:44:49 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,14 @@ void	redirection_types(t_cmd *cmd)
 				tmp->type = APPEND;
 				j += 2;
 			}
-			else
+			else if (cmd->command[j + 1] != '>')
 			{
 				tmp->type = OUTPUT;
 				j++;
 			}
 			tmp = tmp->next;
 		}
-		else if (cmd->command[j] == '<')
-			j++; // pass '<', we'll handle it in redirection_types1
-		else
-			j++;
+		j++;
 	}
 }
 
@@ -126,15 +123,14 @@ void	redirection_types1(t_cmd *cmd)
 				tmp->type = HERE_DOC;
 				j += 2;
 			}
-			else
+			else if (cmd->command[j + 1] != '>')
 			{
 				tmp->type = INPUT;
 				j++;
 			}
 			tmp = tmp->next;
 		}
-		else
-			j++;
+		j++;
 	}
 }
 
