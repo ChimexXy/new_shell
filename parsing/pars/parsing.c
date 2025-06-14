@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 20:34:56 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/14 21:39:19 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:51:07 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,12 @@ int main(int ac, char **av, char **env)
 		t_cmd *tmp = bash->s_cmd;
 		while (tmp)
 		{
-			int j = 0;
-			t_red *tmp_red = tmp->s_red;
-			while (tmp_red)
+			t_env *tmp_env = tmp->s_env;
+			while (tmp_env)
 			{
-				printf("redirection %d file: %s\n", j, tmp_red->file);
-				printf("redirection %d type: %u\n", j, tmp_red->type);
-				tmp_red = tmp_red->next;
-				j++;
+			    printf("env key: %s\n", tmp_env->key);
+			    printf("env value: %s\n", tmp_env->value);
+			    tmp_env = tmp_env->next;
 			}
 			tmp = tmp->next;
 		}
