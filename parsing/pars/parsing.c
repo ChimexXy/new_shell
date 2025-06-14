@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 20:34:56 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/14 21:51:07 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:55:34 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int select_struct1(t_bash *bash)
 
 	cmd = readline("minishell$ ");
 	if (!cmd)
+	{
+		printf("exit\n");
 		return (0);
+	}
 	add_history(cmd);
 	if (!check_cmd(cmd))
 	{
