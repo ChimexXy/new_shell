@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:19 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/14 20:52:57 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/15 17:57:36 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,19 @@ void	add_env_node(t_cmd *cmd, t_env *new)
 
 void	parse_env_key_value(t_env *env, char *arg)
 {
-	int		i;
-	int		len;
+	int	m;
+	int	len;
 
-	i = 0;
+	m = 0;
 	len = ft_strlen(arg);
-	while (arg[i] && arg[i] != '=')
-		i++;
-	env->key = ft_substr(arg, 0, i);
-	if (i + 1 >= len)
+	while(arg[m] && arg[m] != '=')
+		m++;
+	env->key = ft_substr(arg, 0, m);
+	m++;
+	if (m >= len)
 		env->value = ft_strdup("");
 	else
-		env->value = ft_substr(arg, i + 1, len - i - 1);
+		env->value = ft_substr(arg, m, len - m);
 }
 
 void	parse_env_file_key(t_cmd *cmd)
@@ -84,7 +85,7 @@ void	parse_env_file_key(t_cmd *cmd)
 	while (cmd->arguments[j])
 	{
 		if (check_env(cmd->arguments[j]))
-		{
+		{	
 			new = alloc_env_node();
 			if (!new)
 				return ;
