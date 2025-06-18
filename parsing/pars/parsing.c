@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 20:34:56 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/15 17:19:18 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:17:34 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int select_struct1(t_bash *bash)
 	if (!cmd)
 	{
 		printf("exit\n");
+		free(cmd);
 		return (0);
 	}
 	add_history(cmd);
