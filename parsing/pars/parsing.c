@@ -6,29 +6,14 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 20:34:56 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/18 11:17:34 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:23:56 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int select_struct1(t_bash *bash)
+int select_struct1(t_bash *bash, char *cmd)
 {
-	char *cmd;
-
-	cmd = readline("minishell$ ");
-	if (!cmd)
-	{
-		printf("exit\n");
-		free(cmd);
-		return (0);
-	}
-	add_history(cmd);
-	if (!check_cmd(cmd))
-	{
-		free(cmd);
-		return (0);
-	}
 	bash->num_cmd = count_pipes(cmd);
 	bash->commands = ft_strdup(cmd);
 	bash->args_pip = ft_split(cmd, '|');
@@ -71,13 +56,13 @@ int select_struct3(t_bash *bash)
 	return (1);
 }
 
-void select_struct(t_bash *bash)
+void select_struct(t_bash *bash, char *cmd)
 {
 	bash->commands = NULL;
 	bash->args_pip = NULL;
 	bash->num_cmd = 0;
 	bash->s_cmd = NULL;
-	if (!select_struct1(bash))
+	if (!select_struct1(bash, cmd))
 		return ;
 	if (!select_struct2(bash))
 		return ;
@@ -101,6 +86,7 @@ void print_dou(char **env)
 int main(int ac, char **av, char **env)
 {
 	t_bash *bash;
+	char *cmd;
 
 	bash = malloc(sizeof(t_bash));
 	if (!bash)
@@ -110,7 +96,15 @@ int main(int ac, char **av, char **env)
 
 	while (1)
 	{
-		select_struct(bash);
+		cmd = readline("minishell$ ");
+		add_history(cmd);
+		if (!cmd || !check_cmd(cmd))
+		{
+			printf("exit\n");
+			free(cmd);
+			break ;
+		}
+		select_struct(bash, cmd);
 
 		t_cmd *tmp = bash->s_cmd;
 		while (tmp)
