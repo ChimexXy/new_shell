@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 20:34:56 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/18 11:23:56 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/19 10:34:08 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,13 @@ int main(int ac, char **av, char **env)
 		t_cmd *tmp = bash->s_cmd;
 		while (tmp)
 		{
-			t_env *tmp_env = tmp->s_env;
-			while (tmp_env)
+			int i = 0;
+			// t_env *tmp_env = tmp->s_env;
+			while (tmp->arguments[i])
 			{
-			    printf("env key: %s\n", tmp_env->key);
-			    printf("env value: %s\n", tmp_env->value);
-			    tmp_env = tmp_env->next;
+			    printf("arg: %s\n",tmp->arguments[i]);
+			    // printf("env value: %s\n", tmp_env->value);
+			    i++;
 			}
 			tmp = tmp->next;
 		}
